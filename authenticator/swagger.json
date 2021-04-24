@@ -27,6 +27,32 @@
           "required" : true
         } ]
       }
+    },
+    "/validateToken" : {
+      "post" : {
+        "operationId" : "validateToken",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful."
+          }
+        },
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "description" : "Insert a validateToken",
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "schema" : {
+            "type" : "string"
+          },
+          "description" : "The request body for the operation",
+          "required" : true
+        }, {
+          "name" : "token",
+          "in" : "header",
+          "type" : "string"
+        } ]
+      }
     }
   },
   "basePath" : "/authenticator/v1"

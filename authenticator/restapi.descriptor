@@ -2,6 +2,7 @@
 <ns2:restapiDescriptor xmlns="http://com.ibm.etools.mft.descriptor.base" xmlns:ns2="http://com.ibm.etools.mft.descriptor.restapi" definitionType="swagger_20" definitionFile="swagger.json" implementation="gen/authenticator.msgflow" https="false">
     <ns2:operations>
         <ns2:operation name="getToken" implementation="getToken.subflow"/>
+        <ns2:operation name="validateToken" implementation="validateToken.subflow"/>
     </ns2:operations>
     <ns2:errorHandlers/>
 </ns2:restapiDescriptor>

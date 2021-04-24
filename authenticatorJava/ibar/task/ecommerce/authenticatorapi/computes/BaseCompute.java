@@ -34,6 +34,7 @@ public abstract class BaseCompute extends JavaComputeNode {
 		public ElementReference globalEnv;
 		public ElementReference localEnv;
 		public ElementReference outputRoot;
+		public ElementReference inputRoot;
 		
 		public void init() throws Exception {
 			context = new ApplicationContext();
@@ -46,6 +47,7 @@ public abstract class BaseCompute extends JavaComputeNode {
 			globalEnv = globalEnvironment();
 			localEnv = localEnvironment();
 			outputRoot = outputRoot();
+			inputRoot = inputRoot();
 			
 			logger.info(messageId, "===============" + getComputeName() + "===============\n");
 		}
