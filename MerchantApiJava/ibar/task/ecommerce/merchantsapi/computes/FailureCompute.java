@@ -19,7 +19,7 @@ public class FailureCompute extends BaseCompute {
 				try {
 					init();
 					Document doc = getInAssembly().getExceptionList().getDOMDocument();
-					String exceptionString = getXmlFromDoc(doc);
+					String exceptionString = context.getXmlWriter().getXmlFromDoc(doc);
 					context.getLogger().error(messageId, "exception string " + exceptionString);
 					ApiError localError;
 					if (exceptionString.toLowerCase().contains("sockettimeoutexception")) {

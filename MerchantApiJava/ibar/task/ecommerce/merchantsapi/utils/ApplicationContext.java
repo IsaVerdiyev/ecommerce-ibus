@@ -1,5 +1,6 @@
 package ibar.task.ecommerce.merchantsapi.utils;
 
+import ibar.task.ecommerce.merchantsapi.utils.XmlWriter;
 import ibar.task.ecommerce.merchantsapi.dao.MerchantDao;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class ApplicationContext {
 	private Connection connection;
 	private PasswordValidator passwordValidator;
 	private JsonDeserializer jsonDeserializer;
+	private XmlWriter xmlWriter;
 	
 	public ClassicLogger getLogger() throws ConfigurableServiceException, BrokerException, IOException{
 		if(logger == null){
@@ -94,5 +96,12 @@ public class ApplicationContext {
 			jsonDeserializer = new JsonDeserializer(this);
 		}
 		return jsonDeserializer;
+	}
+	
+	public XmlWriter getXmlWriter(){
+		if(xmlWriter == null){
+			xmlWriter = new XmlWriter();
+		}
+		return xmlWriter;
 	}
 }
