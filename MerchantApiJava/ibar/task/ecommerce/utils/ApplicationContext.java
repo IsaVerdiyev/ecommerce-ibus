@@ -28,6 +28,7 @@ public class ApplicationContext {
 	private String messageId;
 	private Connection connection;
 	private PasswordValidator passwordValidator;
+	private JsonDeserializer jsonDeserializer;
 	
 	public ClassicLogger getLogger() throws ConfigurableServiceException, BrokerException, IOException{
 		if(logger == null){
@@ -86,5 +87,12 @@ public class ApplicationContext {
 			passwordValidator = new PasswordValidator();
 		}
 		return passwordValidator;
+	}
+	
+	public JsonDeserializer getJsonDeserializer(){
+		if(jsonDeserializer == null){
+			jsonDeserializer = new JsonDeserializer(this);
+		}
+		return jsonDeserializer;
 	}
 }

@@ -21,7 +21,6 @@ public abstract class AbstractInputCompute<T> extends BaseCompute {
 						inputMessage = new String(getInputRootElement().toBitstream("", "", "", 1208, 1208, 0));
 						String body = null;
 						logger.info(getMessageId(), "input message: " + inputMessage);
-						context.getObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
 						try {
 							if (getInputRootElement().getFirstElementByPath("/JSON/Data") != null) {
 
@@ -30,9 +29,7 @@ public abstract class AbstractInputCompute<T> extends BaseCompute {
 							}
 						} catch (MbParserException e) {
 							throw new NotParseableJsonException(e);
-						} finally {
-							//setGlobalEnvVarialbles(this, null);
-						}
+						} 
 						compute(this, body);
 					} finally {
 						/*setLogsFormDataFromGlobalEnv(this);

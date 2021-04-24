@@ -54,7 +54,7 @@ public abstract class BaseCompute extends JavaComputeNode {
 			globalEnv = globalEnvironment();
 			localEnv = localEnvironment();
 			
-			context.getLogger().info(messageId, "===============" + getComputeName() + "===============\n");
+			logger.info(messageId, "===============" + getComputeName() + "===============\n");
 		}
 
 		public void handleException(BaseJavaComputeEvaluator evaluator, Exception e) throws Exception {

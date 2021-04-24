@@ -15,9 +15,12 @@ public class OutLoggerCompute extends BaseCompute{
 					init();
 
 					outputRoot().set(inputRoot());
-
-					String outJson = new String(outputRoot().getMbElement().getFirstElementByPath("BLOB")
-							.toBitstream("", "", "", 1208, 1208, 0));
+					String outJson = "";
+					MbElement outElement = outputRoot().getMbElement().getFirstElementByPath("BLOB");
+					if(outElement != null){
+						outJson = new String(
+								outElement.toBitstream("", "", "", 1208, 1208, 0));
+					}
 
 					String statusCode = null;
 

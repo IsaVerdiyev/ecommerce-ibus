@@ -51,7 +51,16 @@ create or replace package body e_commerce is
                                  p_out_cursor out sys_refcursor) is
   begin
     open p_out_cursor for
-      select * from ecommerce_merchants t where t.name = p_name;
+      select t.id            merchant_id,
+             t.address       address,
+             t.email_address email_address,
+             t.name          name,
+             t.owner_name    owner_name,
+             t.password      password,
+             t.phone_number  phone_number,
+             t.type          type
+        from ecommerce_merchants t
+       where t.name = p_name;
   end;
 
 end;
