@@ -11,14 +11,17 @@ import oracle.jdbc.OracleTypes;
 import ua.com.integrity.logging.ClassicLogger;
 
 public class MerchantDao extends Dao{
-
+	
+	private String packageFullName;
+	
 	public MerchantDao(Connection conn, ClassicLogger appLogger,
-			String logMessageId) {
+			String logMessageId, String packageFullName) {
 		super(conn, appLogger, logMessageId);
+		this.packageFullName = packageFullName;
 	}
 
 	public Merchant addMerchant(Merchant merchant) throws SQLException{
-		String sql = "{call atbdwh.e_commerce.add_merchant(?, ?, ?, ?, ?, ?, ?, ?)}";
+		String sql = "{call " + packageFullName + ".add_merchant(?, ?, ?, ?, ?, ?, ?, ?)}";
 		try (CallableStatement cls = conn.prepareCall(sql)) {
 			cls.setString("p_name", merchant.getName());
 			cls.setString("p_type", merchant.getType());
@@ -37,7 +40,7 @@ public class MerchantDao extends Dao{
 	
 	public Merchant findByName(String name) throws SQLException{
 		Merchant merchant = null;
-		String sql = " {call atbdwh.e_commerce.get_merchant_by_name(?, ?)}";
+		String sql = " {call " + packageFullName + ".get_merchant_by_name(?, ?)}";
 		try (CallableStatement cls = conn.prepareCall(sql)) {
 			cls.setString("p_name", name);
 			cls.registerOutParameter("p_out_cursor", OracleTypes.CURSOR);

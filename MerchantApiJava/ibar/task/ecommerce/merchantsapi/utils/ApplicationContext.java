@@ -1,6 +1,7 @@
 package ibar.task.ecommerce.merchantsapi.utils;
 
 import ibar.task.ecommerce.merchantsapi.utils.XmlWriter;
+import ibar.task.ecommerce.merchantsapi.computes.BaseCompute;
 import ibar.task.ecommerce.merchantsapi.dao.MerchantDao;
 
 import java.io.IOException;
@@ -31,6 +32,11 @@ public class ApplicationContext {
 	private PasswordValidator passwordValidator;
 	private JsonDeserializer jsonDeserializer;
 	private XmlWriter xmlWriter;
+	private BaseCompute.BaseJavaComputeEvaluator evaluator;
+	
+	public ApplicationContext(BaseCompute.BaseJavaComputeEvaluator evaluator){
+		this.evaluator = evaluator;
+	}
 	
 	public ClassicLogger getLogger() throws ConfigurableServiceException, BrokerException, IOException{
 		if(logger == null){
@@ -50,7 +56,7 @@ public class ApplicationContext {
 	
 	public MerchantDao getMerchantDao() throws ConfigurableServiceException, MbException, BrokerException, IOException{
 		if(merchantDao == null ){
-			merchantDao = new MerchantDao(connection, getLogger(), messageId);
+			merchantDao = new MerchantDao(evaluator.getConnectionByJdbcName(getConfigurableService().get("JDBCName")), getLogger(), messageId, getConfigurableService().get("PackageFullname"));
 		}
 		return merchantDao;
 	}

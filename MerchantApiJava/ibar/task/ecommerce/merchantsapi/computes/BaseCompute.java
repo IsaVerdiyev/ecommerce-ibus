@@ -27,19 +27,17 @@ public abstract class BaseCompute extends JavaComputeNode {
 		return getClass().getSimpleName();
 	}
 
-	protected abstract class BaseJavaComputeEvaluator extends JavaComputeEvaluator {
+	public abstract class BaseJavaComputeEvaluator extends JavaComputeEvaluator {
 
 		ApplicationContext context;
 		public ElementReference globalEnv;
 		public ElementReference localEnv;
 		
 		public void init() throws Exception {
-			context = new ApplicationContext();
+			context = new ApplicationContext(this);
 			logger = context.getLogger();
 			assignMessageId();
 			context.setMessageId(getMessageId());
-			Connection conn = getJDBCType4Connection(context.getConfigurableService().get("JDBCName"), JDBC_TransactionType.MB_TRANSACTION_AUTO);
-			context.setConnection(conn);
 			context.getObjectMapper().setVisibility(PropertyAccessor.ALL, Visibility.NONE);
 			context.getObjectMapper().setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 			context.getObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -91,6 +89,10 @@ public abstract class BaseCompute extends JavaComputeNode {
 					+ "\nheaders: \n"
 					+ headers.entrySet().stream().map(x -> "\t" + x.getKey() + ": " + x.getValue())
 							.collect(Collectors.joining("\n")) + "\ncontent: \n\t" + json;
+		}
+		
+		public Connection getConnectionByJdbcName(String jdbcName) throws MbException{
+			return getJDBCType4Connection(jdbcName, JDBC_TransactionType.MB_TRANSACTION_AUTO);
 		}
 	}
 
