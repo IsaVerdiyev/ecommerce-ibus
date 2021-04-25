@@ -29,6 +29,11 @@ create or replace package e_commerce is
 
   procedure add_delivery_options(p_product_id       in nvarchar2,
                                  p_delivery_options in nvarchar2);
+
+  procedure get_inv_items_by_product_ids(p_product_ids in nvarchar2,
+                                         p_out_cursor  out sys_refcursor);
+  procedure get_deliv_opt_by_product_ids(p_product_ids in nvarchar2,
+                                         p_out_cursor  out sys_refcursor);
 end;
 /
 create or replace package body e_commerce is
@@ -113,6 +118,30 @@ create or replace package body e_commerce is
       (id, some_delivery_options)
     values
       (p_product_id, p_delivery_options);
+  end;
+
+  procedure get_inv_items_by_product_ids(p_product_ids in nvarchar2,
+                                         p_out_cursor  out sys_refcursor) is
+  begin
+    open p_out_cursor for
+      select i.id id, i.name name, i.product_id product_id
+        from ecommerce_inventory_items i
+       where i.product_id in
+             (select regexp_substr(p_product_ids, '[^,]+', 1, level)
+                from dual
+              connect by regexp_substr(p_product_ids, '[^,]+', 1, level) is not null);
+  end;
+
+  procedure get_deliv_opt_by_product_ids(p_product_ids in nvarchar2,
+                                         p_out_cursor  out sys_refcursor) is
+  begin
+    open p_out_cursor for
+      select d.id product_id, d.some_delivery_options some_delivery_options
+        from ecommerce_delivery_options d
+       where d.id in
+             (select regexp_substr(p_product_ids, '[^,]+', 1, level)
+                from dual
+              connect by regexp_substr(p_product_ids, '[^,]+', 1, level) is not null);
   end;
 end;
 /
