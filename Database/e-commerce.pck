@@ -15,6 +15,20 @@ create or replace package e_commerce is
 
   procedure get_merchant_by_name(p_name       in nvarchar2,
                                  p_out_cursor out sys_refcursor);
+
+  procedure add_product(p_name             nvarchar2,
+                        p_description      nvarchar2,
+                        p_unit_price       number,
+                        p_merchant_id      number,
+                        p_product_category nvarchar2,
+                        p_product_id       out number);
+
+  procedure add_inventory_item(p_name              nvarchar2,
+                               p_product_id        in number,
+                               p_inventory_item_id out number);
+
+  procedure add_delivery_options(p_product_id       in nvarchar2,
+                                 p_delivery_options in nvarchar2);
 end;
 /
 create or replace package body e_commerce is
@@ -63,5 +77,42 @@ create or replace package body e_commerce is
        where t.name = p_name;
   end;
 
+  procedure add_product(p_name             nvarchar2,
+                        p_description      nvarchar2,
+                        p_unit_price       number,
+                        p_merchant_id      number,
+                        p_product_category nvarchar2,
+                        p_product_id       out number) is
+  begin
+    insert into ecommerce_products
+      (name, description, merchant_id, product_category, unit_price)
+    values
+      (p_name,
+       p_description,
+       p_merchant_id,
+       p_product_category,
+       p_unit_price)
+    returning id into p_product_id;
+  end;
+
+  procedure add_inventory_item(p_name              nvarchar2,
+                               p_product_id        in number,
+                               p_inventory_item_id out number) is
+  begin
+    insert into ecommerce_inventory_items
+      (name, product_id)
+    values
+      (p_name, p_product_id)
+    returning id into p_inventory_item_id;
+  end;
+
+  procedure add_delivery_options(p_product_id       in nvarchar2,
+                                 p_delivery_options in nvarchar2) is
+  begin
+    insert into ecommerce_delivery_options
+      (id, some_delivery_options)
+    values
+      (p_product_id, p_delivery_options);
+  end;
 end;
 /

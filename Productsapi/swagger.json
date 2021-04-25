@@ -6,7 +6,7 @@
     "description" : "Productsapi"
   },
   "paths" : {
-    "/procucts" : {
+    "/products" : {
       "post" : {
         "operationId" : "addProduct",
         "responses" : {

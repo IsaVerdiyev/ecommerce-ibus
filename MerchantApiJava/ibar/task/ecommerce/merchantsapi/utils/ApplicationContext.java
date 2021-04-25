@@ -1,11 +1,9 @@
 package ibar.task.ecommerce.merchantsapi.utils;
 
-import ibar.task.ecommerce.merchantsapi.utils.XmlWriter;
 import ibar.task.ecommerce.merchantsapi.computes.BaseCompute;
 import ibar.task.ecommerce.merchantsapi.dao.MerchantDao;
 
 import java.io.IOException;
-import java.sql.Connection;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -27,8 +25,6 @@ public class ApplicationContext {
 	private MerchantDao merchantDao;
 	private Validator validator;
 	private ClassicLogger logger;
-	private String messageId;
-	private Connection connection;
 	private PasswordValidator passwordValidator;
 	private JsonDeserializer jsonDeserializer;
 	private XmlWriter xmlWriter;
@@ -45,18 +41,9 @@ public class ApplicationContext {
 		return logger;
 	}
 	
-	
-	public void setMessageId(String messageId){
-		this.messageId = messageId;
-	}
-	
-	public void setConnection(Connection connection){
-		this.connection = connection;
-	}
-	
 	public MerchantDao getMerchantDao() throws ConfigurableServiceException, MbException, BrokerException, IOException{
 		if(merchantDao == null ){
-			merchantDao = new MerchantDao(evaluator.getConnectionByJdbcName(getConfigurableService().get("JDBCName")), getLogger(), messageId, getConfigurableService().get("PackageFullname"));
+			merchantDao = new MerchantDao(evaluator.getConnectionByJdbcName(getConfigurableService().get("JDBCName")), getLogger(), evaluator.getMessageId(), getConfigurableService().get("PackageFullname"));
 		}
 		return merchantDao;
 	}
