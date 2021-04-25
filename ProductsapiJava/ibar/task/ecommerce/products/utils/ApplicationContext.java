@@ -28,65 +28,82 @@ public class ApplicationContext {
 	private JsonDeserializer jsonDeserializer;
 	private XmlWriter xmlWriter;
 	private BaseCompute.BaseJavaComputeEvaluator evaluator;
-	
-	public ApplicationContext(BaseCompute.BaseJavaComputeEvaluator evaluator){
+	private ProductsQueryBuilder productsQueryBuilder;
+
+	public ApplicationContext(BaseCompute.BaseJavaComputeEvaluator evaluator) {
 		this.evaluator = evaluator;
 	}
-	
-	public ClassicLogger getLogger() throws ConfigurableServiceException, BrokerException, IOException{
-		if(logger == null){
-			logger = ClassicLogger.fromConfigurableService(getConfigurableService());
+
+	public ClassicLogger getLogger() throws ConfigurableServiceException,
+			BrokerException, IOException {
+		if (logger == null) {
+			logger = ClassicLogger
+					.fromConfigurableService(getConfigurableService());
 		}
 		return logger;
 	}
-	
-	public ProductsDao getProductsDao() throws ConfigurableServiceException, MbException, BrokerException, IOException{
-		if(productsDao == null ){
-			productsDao = new ProductsDao(evaluator.getConnectionByJdbcName(getConfigurableService().get("JDBCName")), getLogger(), evaluator.getMessageId(), getConfigurableService().get("PackageFullname"));
+
+	public ProductsDao getProductsDao() throws ConfigurableServiceException,
+			MbException, BrokerException, IOException {
+		if (productsDao == null) {
+			productsDao = new ProductsDao(
+					evaluator.getConnectionByJdbcName(getConfigurableService()
+							.get("JDBCName")), getLogger(),
+					evaluator.getMessageId(), getConfigurableService().get(
+							"PackageFullname"));
 		}
 		return productsDao;
 	}
-	
-	public ConfigurableService getConfigurableService() throws ConfigurableServiceException{
-		if(cs == null){
+
+	public ConfigurableService getConfigurableService()
+			throws ConfigurableServiceException {
+		if (cs == null) {
 			cs = ConfigurableService.getInstance("ECOMMERCE_PRODUCTS");
 		}
 		return cs;
 	}
-	
-	public ObjectMapper getObjectMapper(){
-		if(mapper == null){
+
+	public ObjectMapper getObjectMapper() {
+		if (mapper == null) {
 			mapper = new ObjectMapper();
 		}
 		return mapper;
 	}
-	
-	public StackTraceReceiver getStackTraceReceiver(){
-		if(stackTraceReciever == null){
+
+	public StackTraceReceiver getStackTraceReceiver() {
+		if (stackTraceReciever == null) {
 			stackTraceReciever = new StackTraceReceiver();
 		}
 		return stackTraceReciever;
 	}
-	
-	public Validator getValidator(){
-		if(validator == null){
-			validator = Validation.byDefaultProvider().configure().messageInterpolator(new ParameterMessageInterpolator())
+
+	public Validator getValidator() {
+		if (validator == null) {
+			validator = Validation.byDefaultProvider().configure()
+					.messageInterpolator(new ParameterMessageInterpolator())
 					.buildValidatorFactory().getValidator();
 		}
 		return validator;
 	}
-	
-	public JsonDeserializer getJsonDeserializer(){
-		if(jsonDeserializer == null){
+
+	public JsonDeserializer getJsonDeserializer() {
+		if (jsonDeserializer == null) {
 			jsonDeserializer = new JsonDeserializer(this);
 		}
 		return jsonDeserializer;
 	}
-	
-	public XmlWriter getXmlWriter(){
-		if(xmlWriter == null){
+
+	public XmlWriter getXmlWriter() {
+		if (xmlWriter == null) {
 			xmlWriter = new XmlWriter();
 		}
 		return xmlWriter;
+	}
+
+	public ProductsQueryBuilder getProductsQueryBuilder() {
+		if (productsQueryBuilder == null) {
+			productsQueryBuilder = new ProductsQueryBuilder();
+		}
+		return productsQueryBuilder;
 	}
 }

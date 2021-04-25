@@ -6,7 +6,11 @@ import ibar.task.ecommerce.products.models.Product;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import oracle.jdbc.OracleTypes;
 import ua.com.integrity.logging.ClassicLogger;
@@ -61,5 +65,23 @@ public class ProductsDao extends Dao{
 			cls.execute();
 			return deliveryOptions;
 		}
+	}
+	
+	public List<Product> getProductsByQueryString(String query) throws SQLException{
+		List<Product> products = new ArrayList<>();
+		try (Statement cls = conn.createStatement()) {
+			ResultSet rs = cls.executeQuery(query);
+			while(rs.next()){
+				Product product = new Product();
+				product.setId(rs.getLong("id"));
+				product.setName(rs.getString("name"));
+				product.setDescription(rs.getString("description"));
+				product.setMerchantId(rs.getLong("merchant_id"));
+				product.setProductCategory(rs.getString("product_category"));
+				product.setUnitPrice(rs.getBigDecimal("unit_price"));
+				products.add(product);
+			}
+		}
+		return products;
 	}
 }
