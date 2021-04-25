@@ -11,7 +11,6 @@ public class AuthenticationInfo {
 	@NotBlank
     String password;
 	
-	@NotBlank
     Boolean isRemembered;
 
     public String getMerchantName() {

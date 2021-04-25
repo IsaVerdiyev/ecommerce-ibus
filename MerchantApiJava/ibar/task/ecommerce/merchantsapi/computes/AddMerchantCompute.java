@@ -6,7 +6,7 @@ import ibar.task.ecommerce.merchantsapi.models.Merchant;
 
 import java.sql.SQLException;
 
-public class AddMerchantCompute extends AbstractInputCompute<Merchant> {
+public class AddMerchantCompute extends AbstractInputCompute {
 
 	@Override
 	protected void compute(BaseJavaComputeEvaluator evaluator, String body)

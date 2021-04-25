@@ -5,8 +5,7 @@ import ibar.task.ecommerce.merchantsapi.exceptions.MerchantNotFoundException;
 import ibar.task.ecommerce.merchantsapi.models.AuthenticationInfo;
 import ibar.task.ecommerce.merchantsapi.models.Merchant;
 
-public class SignInInputCompute extends
-		AbstractInputCompute<AuthenticationInfo> {
+public class SignInInputCompute extends AbstractInputCompute {
 
 	@Override
 	protected void compute(BaseJavaComputeEvaluator evaluator, String body)

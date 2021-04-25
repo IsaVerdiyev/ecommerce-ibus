@@ -5,7 +5,7 @@ import ibar.task.ecommerce.apigateway.models.Merchant;
 
 import com.ibm.broker.plugin.MbParserException;
 
-public class SignInOutputCompute extends BaseCompute {
+public class SignUpOutputCompute extends BaseCompute {
 
 	@Override
 	protected JavaComputeEvaluator getEvaluator() {

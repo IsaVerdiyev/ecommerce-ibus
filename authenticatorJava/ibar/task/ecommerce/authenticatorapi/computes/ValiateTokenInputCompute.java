@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 
 
-public class ValiateTokenInputCompute extends AbstractInputCompute<String>{
+public class ValiateTokenInputCompute extends AbstractInputCompute {
 
 	@Override
 	protected void compute(BaseJavaComputeEvaluator evaluator, String body)
