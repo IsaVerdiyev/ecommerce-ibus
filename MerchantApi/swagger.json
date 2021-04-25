@@ -26,6 +26,24 @@
           "description" : "The request body for the operation",
           "required" : true
         } ]
+      },
+      "get" : {
+        "operationId" : "getMerchant",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve merchants",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "type" : "string"
+        } ]
       }
     },
     "/merchants/signIn" : {

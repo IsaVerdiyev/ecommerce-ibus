@@ -2,7 +2,7 @@ package ibar.task.ecommerce.authenticatorapi.computes;
 
 import ibar.task.ecommerce.authenticatorapi.models.AuthenticationInfo;
 
-public class GetTokenInputCompute extends AbstractInputCompute<AuthenticationInfo> {
+public class GetTokenInputCompute extends AbstractInputCompute {
 
 	@Override
 	protected void compute(BaseJavaComputeEvaluator evaluator, String body)

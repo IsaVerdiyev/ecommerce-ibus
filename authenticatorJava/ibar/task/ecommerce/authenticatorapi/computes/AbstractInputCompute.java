@@ -4,7 +4,7 @@ import ibar.task.ecommerce.authenticatorapi.exceptions.NotParseableJsonException
 
 import com.ibm.broker.plugin.MbParserException;
 
-public abstract class AbstractInputCompute<T> extends BaseCompute {
+public abstract class AbstractInputCompute extends BaseCompute {
 	@Override
 	protected JavaComputeEvaluator getEvaluator() {
 

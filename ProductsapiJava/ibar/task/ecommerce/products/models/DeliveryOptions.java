@@ -1,9 +1,11 @@
 package ibar.task.ecommerce.products.models;
 
+import javax.validation.constraints.NotBlank;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class DeliveryOptions {
-
+	@NotBlank
     String someDeliveryOption;
 
 	public String getSomeDeliveryOption() {

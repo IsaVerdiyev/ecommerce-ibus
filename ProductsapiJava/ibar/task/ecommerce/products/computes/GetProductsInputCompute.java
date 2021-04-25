@@ -5,7 +5,7 @@ import ibar.task.ecommerce.products.models.Product;
 import java.util.List;
 import java.util.Map;
 
-public class GetProductsInputCompute extends AbstractInputCompute<String> {
+public class GetProductsInputCompute extends AbstractInputCompute {
 
 	@Override
 	protected void compute(BaseJavaComputeEvaluator evaluator, String body)

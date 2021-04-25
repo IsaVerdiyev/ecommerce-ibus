@@ -2,7 +2,7 @@ package ibar.task.ecommerce.products.computes;
 
 import ibar.task.ecommerce.products.models.Product;
 
-public class AddProductInputCompute extends AbstractInputCompute<Product> {
+public class AddProductInputCompute extends AbstractInputCompute {
 
 	@Override
 	protected void compute(BaseJavaComputeEvaluator evaluator, String body)
