@@ -1,8 +1,8 @@
-package ibar.task.ecommerce.merchantsapi.computes;
+package ibar.task.ecommerce.products.computes;
 
-import ibar.task.ecommerce.merchantsapi.errors.ApiError;
-import ibar.task.ecommerce.merchantsapi.exceptions.TimeoutException;
-import ibar.task.ecommerce.merchantsapi.exceptions.UknownException;
+import ibar.task.ecommerce.products.errors.ApiError;
+import ibar.task.ecommerce.products.exceptions.TimeoutException;
+import ibar.task.ecommerce.products.exceptions.UknownException;
 
 import org.w3c.dom.Document;
 

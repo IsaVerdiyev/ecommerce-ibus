@@ -1,9 +1,11 @@
-package ibar.task.ecommerce.merchantsapi.computes;
+package ibar.task.ecommerce.products.computes;
 
-import ibar.task.ecommerce.merchantsapi.errors.ApiError;
-import ibar.task.ecommerce.merchantsapi.exceptions.CommonException;
-import ibar.task.ecommerce.merchantsapi.exceptions.UknownException;
-import ibar.task.ecommerce.merchantsapi.utils.ApplicationContext;
+
+
+import ibar.task.ecommerce.products.errors.ApiError;
+import ibar.task.ecommerce.products.exceptions.CommonException;
+import ibar.task.ecommerce.products.exceptions.UknownException;
+import ibar.task.ecommerce.products.utils.ApplicationContext;
 
 import java.sql.Connection;
 import java.util.HashMap;
