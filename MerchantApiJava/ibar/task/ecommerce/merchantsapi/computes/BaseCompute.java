@@ -37,7 +37,6 @@ public abstract class BaseCompute extends JavaComputeNode {
 			context = new ApplicationContext(this);
 			logger = context.getLogger();
 			assignMessageId();
-			context.setMessageId(getMessageId());
 			context.getObjectMapper().setVisibility(PropertyAccessor.ALL, Visibility.NONE);
 			context.getObjectMapper().setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 			context.getObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);

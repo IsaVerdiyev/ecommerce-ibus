@@ -6,7 +6,7 @@
     "description" : "Productsapi"
   },
   "paths" : {
-    "/procucts" : {
+    "/products" : {
       "post" : {
         "operationId" : "addProduct",
         "responses" : {
@@ -25,6 +25,54 @@
           },
           "description" : "The request body for the operation",
           "required" : true
+        } ]
+      },
+      "get" : {
+        "operationId" : "getProducts",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve products",
+        "parameters" : [ {
+          "name" : "pageSize",
+          "in" : "query",
+          "type" : "number"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "type" : "number"
+        }, {
+          "name" : "sortByPriceAsc",
+          "in" : "query",
+          "type" : "boolean",
+          "required" : false
+        }, {
+          "name" : "sortByPriceDesc",
+          "in" : "query",
+          "type" : "boolean",
+          "required" : false
+        }, {
+          "name" : "sortByInventorySizeAsc",
+          "in" : "query",
+          "type" : "boolean"
+        }, {
+          "name" : "sortByInventorySizeDesc",
+          "in" : "query",
+          "type" : "boolean"
+        }, {
+          "name" : "inventorySize_gth",
+          "in" : "query",
+          "type" : "number"
+        }, {
+          "name" : "merchantId",
+          "in" : "query",
+          "type" : "number"
         } ]
       }
     }
