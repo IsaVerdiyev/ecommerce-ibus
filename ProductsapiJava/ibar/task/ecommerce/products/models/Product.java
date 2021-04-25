@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -20,16 +21,15 @@ public class Product {
     @NotBlank
     String description;
 
-    @NotBlank
+    @NotNull
     BigDecimal unitPrice;
 
 
     List<InventoryItem> inventoryItems = new ArrayList<>();
 
-    @NotBlank
     DeliveryOptions deliveryOptions;
 
-    @NotBlank
+    @NotNull
     Long merchantId;
 
 	public Long getId() {

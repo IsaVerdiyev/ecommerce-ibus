@@ -1,10 +1,8 @@
 package ibar.task.ecommerce.apigateway.computes;
 
 import ibar.task.ecommerce.apigateway.exceptions.NotSignedInException;
+import ibar.task.ecommerce.apigateway.exceptions.TokenNotValidException;
 import ibar.task.ecommerce.apigateway.models.GlobalEnvEnum;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
 
 import java.util.Base64;
 import java.util.Map;
@@ -31,7 +29,7 @@ public class ValidateTokenRequestCompute extends AbstractInputCompute {
 			throw new NotSignedInException();
 		}
 		evaluator.globalEnv.set(GlobalEnvEnum.TOKEN.name(), token);
-		
+
 		String merchantName = getMerchantNameFromToken(token);
 		evaluator.globalEnv.set(GlobalEnvEnum.MERCHANT_NAME.name(),
 				merchantName);
@@ -48,12 +46,17 @@ public class ValidateTokenRequestCompute extends AbstractInputCompute {
 		logger.info(evaluator.getMessageId(), "requestLog: \n" + requestLog);
 	}
 
-	public String getMerchantNameFromToken(String token){
-		String[] tokenParts = token.split("\\.");
-		String bodyChunk = tokenParts[1];
-		byte[] decodedBytes = Base64.getDecoder().decode(bodyChunk);
-		String body = new String(decodedBytes);
-		JSONObject json = new JSONObject(body);
-		return json.get("sub").toString();
+	public String getMerchantNameFromToken(String token) throws TokenNotValidException {
+		try {
+			String[] tokenParts = token.split("\\.");
+			String bodyChunk = tokenParts[1];
+			byte[] decodedBytes = Base64.getDecoder().decode(bodyChunk);
+			String body = new String(decodedBytes);
+			JSONObject json = new JSONObject(body);
+			return json.get("sub").toString();
+		} catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+			throw new TokenNotValidException(e);
+		}
+
 	}
 }

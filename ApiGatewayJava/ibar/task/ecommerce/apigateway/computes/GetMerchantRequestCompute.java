@@ -2,8 +2,6 @@ package ibar.task.ecommerce.apigateway.computes;
 
 import ibar.task.ecommerce.apigateway.models.GlobalEnvEnum;
 
-import com.ibm.broker.plugin.MbElement;
-
 public class GetMerchantRequestCompute extends BaseCompute {
 
 	@Override

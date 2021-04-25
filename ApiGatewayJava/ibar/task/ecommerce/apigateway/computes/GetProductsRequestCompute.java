@@ -1,12 +1,11 @@
 package ibar.task.ecommerce.apigateway.computes;
 
+import ibar.task.ecommerce.apigateway.models.GlobalEnvEnum;
+import ibar.task.ecommerce.apigateway.models.Merchant;
+
 import java.util.Map;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.ibm.broker.plugin.MbElement;
-
-import ibar.task.ecommerce.apigateway.models.GlobalEnvEnum;
-import ibar.task.ecommerce.apigateway.models.Merchant;
 
 public class GetProductsRequestCompute extends BaseCompute {
 
@@ -18,17 +17,16 @@ public class GetProductsRequestCompute extends BaseCompute {
 			public boolean evaluate() throws Exception {
 				try {
 					init();
-				
+
 					String body = new String(getInputRootElement()
-							.getFirstElementByPath("BLOB")
-							.toBitstream("", "", "", 1208, 1208, 0));
-					
-					Merchant merchant = context.getObjectMapper().readValue(body, Merchant.class);
-					
+							.getFirstElementByPath("BLOB").toBitstream("", "",
+									"", 1208, 1208, 0));
+
+					Merchant merchant = context.getObjectMapper().readValue(
+							body, Merchant.class);
 					String url = context.getConfigurableService().get(
-							"ProductsApiUrl");
-					localEnv.set("Destination/HTTP/RequestURL", url);
-					localEnv.set("Destination/HTTP/RequestLine/Method", "GET");
+							"ProductsApiUrl")
+							+ "?";
 					Map<String, String> queryParams = context
 							.getObjectMapper()
 							.readValue(
@@ -38,14 +36,15 @@ public class GetProductsRequestCompute extends BaseCompute {
 									});
 					queryParams.put("merchant_id", merchant.getId().toString());
 					queryParams.put("inventorySize_gth", String.valueOf(5));
-					MbElement headerElement = getOutputRootElement()
-							.createElementAsFirstChild("HTTPInputHeader");
 					for (Map.Entry<String, String> keyValue : queryParams
 							.entrySet()) {
-						headerElement.createElementAsLastChild(
-								MbElement.TYPE_NAME_VALUE, keyValue.getKey(),
-								keyValue.getValue());
+						url += keyValue.getKey() + "=" + keyValue.getValue()
+								+ "&";
 					}
+
+					localEnv.set("Destination/HTTP/RequestURL", url);
+					localEnv.set("Destination/HTTP/RequestLine/Method", "GET");
+
 					String requestLog = generateRequestLog();
 					logger.info(getMessageId(), "requestLog: \n" + requestLog);
 					propagate();
