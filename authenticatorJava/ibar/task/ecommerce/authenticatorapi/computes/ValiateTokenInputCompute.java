@@ -3,6 +3,7 @@ package ibar.task.ecommerce.authenticatorapi.computes;
 import ibar.task.ecommerce.authenticatorapi.exceptions.TokenNotSentException;
 import ibar.task.ecommerce.authenticatorapi.exceptions.TokenNotValidException;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +21,7 @@ public class ValiateTokenInputCompute extends AbstractInputCompute {
 		}
 		try{
 		evaluator.context.getTokenService().validateToken(token);
-		}catch(MalformedJwtException e){
+		}catch(MalformedJwtException | SignatureException e){
 			throw new TokenNotValidException(e);
 		}
 		evaluator.outputRoot.set("HTTPReplyHeader/token", token);

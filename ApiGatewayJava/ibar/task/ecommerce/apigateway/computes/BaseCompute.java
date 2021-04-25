@@ -110,6 +110,10 @@ public abstract class BaseCompute extends JavaComputeNode {
 			return getJDBCType4Connection(jdbcName,
 					JDBC_TransactionType.MB_TRANSACTION_AUTO);
 		}
+		
+		public MbElement getOutputRootMbElement() throws MbException{
+			return getOutputRootElement();
+		}
 	}
 
 	public String getStrOrEmptyStrFromMbElement(MbElement element)

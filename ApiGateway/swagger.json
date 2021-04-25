@@ -49,6 +49,52 @@
           "required" : true
         } ]
       }
+    },
+    "/products" : {
+      "get" : {
+        "operationId" : "getProducts",
+        "responses" : {
+          "200" : {
+            "description" : "The operation was successful.",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "produces" : [ "application/json" ],
+        "description" : "Retrieve products",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "header",
+          "type" : "string",
+          "required" : true
+        }, {
+          "name" : "sortByInventorySizeDesc",
+          "in" : "query",
+          "type" : "boolean",
+          "required" : false
+        }, {
+          "name" : "sortByInventorySizeAsc",
+          "in" : "query",
+          "type" : "boolean"
+        }, {
+          "name" : "pageNumber",
+          "in" : "query",
+          "type" : "number"
+        }, {
+          "name" : "sortByPriceDesc",
+          "in" : "query",
+          "type" : "boolean"
+        }, {
+          "name" : "sortByPriceAsc",
+          "in" : "query",
+          "type" : "boolean"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "type" : "number"
+        } ]
+      }
     }
   },
   "basePath" : "/apigateway/v1"
