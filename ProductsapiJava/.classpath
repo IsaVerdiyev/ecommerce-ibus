@@ -14,6 +14,6 @@
 	<classpathentry kind="lib" path="/common-jars/jackson-databind-2.9.0.jar"/>
 	<classpathentry kind="lib" path="/common-jars/jakarta.validation-api-2.0.2.jar"/>
 	<classpathentry kind="lib" path="/common-jars/jboss-logging-3.3.2.Final.jar"/>
-	<classpathentry kind="lib" path="/common-jars/jjwt-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/common-jars/ojdbc7.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
