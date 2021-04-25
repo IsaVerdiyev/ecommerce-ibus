@@ -1,10 +1,13 @@
 package ibar.task.ecommerce.products.models;
 
+import javax.validation.constraints.NotBlank;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class InventoryItem {
 	Long id;
 
+	@NotBlank
     String name;
     
 	public Long getId() {

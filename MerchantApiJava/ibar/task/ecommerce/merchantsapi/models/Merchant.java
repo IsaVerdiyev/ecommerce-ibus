@@ -7,25 +7,25 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Merchant {
     Long id;
 
-    @NotBlank(message = "type is mandatory")
+    @NotBlank
     String type;
 
-    @NotBlank(message = "name is mandatory")
+    @NotBlank
     String name;
 
-    @NotBlank(message = "ownerName is mandatory")
+    @NotBlank
     String ownerName;
 
-    @NotBlank(message = "address is mandatory")
+    @NotBlank
     String address;
 
-    @NotBlank(message = "phoneNumber is mandatory")
+    @NotBlank
     String phoneNumber;
 
-    @NotBlank(message = "emailAddress is mandatory")
+    @NotBlank
     String emailAddress;
 
-    @NotBlank(message = "password is mandatory")
+    @NotBlank
     String password;
 
     public Long getId() {

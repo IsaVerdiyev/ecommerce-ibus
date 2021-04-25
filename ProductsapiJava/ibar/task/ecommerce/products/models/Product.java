@@ -4,32 +4,32 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Product {
     Long id;
 
-    @NotNull
+    @NotBlank
     String productCategory;
 
-    @NotNull(message = "name is mandatory")
+    @NotBlank
     String name;
 
-    @NotNull(message = "description is mandatory")
+    @NotBlank
     String description;
 
-    @NotNull
+    @NotBlank
     BigDecimal unitPrice;
 
 
     List<InventoryItem> inventoryItems = new ArrayList<>();
 
-    @NotNull
+    @NotBlank
     DeliveryOptions deliveryOptions;
 
-    @NotNull
+    @NotBlank
     Long merchantId;
 
 	public Long getId() {

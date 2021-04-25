@@ -1,10 +1,17 @@
 package ibar.task.ecommerce.merchantsapi.models;
 
+import javax.validation.constraints.NotBlank;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class AuthenticationInfo {
+	@NotBlank
     String merchantName;
+	
+	@NotBlank
     String password;
+	
+	@NotBlank
     Boolean isRemembered;
 
     public String getMerchantName() {
